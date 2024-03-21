@@ -9,7 +9,7 @@ Just a small request to use cloudflare DNS, so I write a shell to use it.
 
 ### Run in linux or MacOS
 
-zh
+**zh**
 ```
 git clone https://github.com/panp1/cloudfira-dns-shell.git
 cd cloudfira-dns-shell
@@ -20,7 +20,7 @@ export API_TOKEN="Your-API-TOKEN"
 ```
 ![](./image/zh.jpg)
 
-en
+**en**
 ```
 git clone https://github.com/panp1/cloudfira-dns-shell.git
 cd cloudfira-dns-shell
@@ -33,11 +33,12 @@ export API_TOKEN="Your-API-TOKEN"
 ![](./image/en.jpg)
 
 ### Run in Docker
-
+**zh**
 ```
 docker run -it --rm -e ZONE_ID="xxxxxxxxxxxxxxxxxx" -e API_TOKEN="xxxxxxxxxxxxx" registry.cn-hangzhou.aliyuncs.com/orcc/cd-dns-tools:zh
 ```
 
+**en**
 ```
 docker run -it --rm -e ZONE_ID="xxxxxxxxxxxxxxxxxx" -e API_TOKEN="xxxxxxxxxxxxx" registry.cn-hangzhou.aliyuncs.com/orcc/cd-dns-tools:en
 ```
