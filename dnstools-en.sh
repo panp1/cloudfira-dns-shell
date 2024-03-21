@@ -1,31 +1,24 @@
 #!/bin/bash
 
-# 定义全局变量
-ZONE_ID=080de50a45aadb54b55210457af3a49d
-API_TOKEN=Kgtvi1w6Pmj5gXyiwZOaSNbyS4lIT3JNd3VYE05g
 while true; do
 
-# 显示主菜单选项
 echo ""
 echo "###########################################################################################"
-echo "#  请选择一个功能："
+echo "#  Select an option:"
 echo "--------------------------------------------------------------------------------------------"
-echo "#  1. 查看 DNS 记录"
-echo "#  2. 添加 DNS 记录"
-echo "#  3. 删除 DNS 记录"
-echo "#  4. 退出"
+echo "#  1. List DNS records"
+echo "#  2. Add DNS record"
+echo "#  3. Delete DNS records"
+echo "#  4. exit"
 echo "###########################################################################################"
 echo ""
-
-# 读取用户输入. 删除 DNS 记录"
 echo "###########################################################################################"
 
-# 读取用户输入
-read -p "请输入选项数字: " choice
+read -p "Input option: " choice
 echo ""
 case $choice in
     1)
-        echo "您选择了查看 DNS 记录"
+        echo "List DNS records"
         echo "| ---------------ID--------------- | -TYPE- | -------NAME------- | -------CONTENT-------|"
         curl -s --request GET \
         --url https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records \
@@ -33,58 +26,54 @@ case $choice in
         -H "Content-Type: application/json"  | jq -r '.result[] | [.id, .type, .name, .content] | @tsv'| awk '{printf "| %-32s | %-4s | %-10s | %-10s |\n", $1, $2, $3, $4} END {print "--------------------------------------------------------------------------------------------"}'
         ;;
     2)
-        echo "您选择了添加 DNS 记录"
-
-        # 显示添加记录类型的子菜单选项
+        echo "Add DNS records"
         echo "--------------------------------------------------------------------------------------------"
-        echo "# 请选择要添加的记录类型："
-        echo "# "
+        echo "# Select an DNS type"
         echo "# 1. A"
         echo "# 2. CNAME"
         echo "# 3. TXT"
-        echo "# 4. 返回"
+        echo "# 4. return"
         echo "--------------------------------------------------------------------------------------------"
-        # 读取用户输入
-        read -p "请输入选项数字: " record_type
+        read -p "Input option: " record_type
         echo ""
         case $record_type in
             1)
-                echo "您选择了添加 A 记录"
-                read -p "请输入 DNS 名称: " dns_name
-                read -p "请输入 IP 地址: " ip_address
-                echo "正在添加 DNS 记录..."
+                echo "Add a A record"
+                read -p "input DNS name: " dns_name
+                read -p "input IP address: " ip_address
+                echo "Working..."
                 curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records" \
                 -H "Authorization: Bearer ${API_TOKEN}" \
                 -H "Content-Type: application/json" \
                 --data '{"type":"A","name":"'"$dns_name"'","content":"'"$ip_address"'","ttl":1,"proxied":true}'   | jq .success
                 ;;
             2)
-                echo "您选择了添加 CNAME 记录"
-                read -p "请输入 DNS 名称: " dns_name
-                read -p "请输入 HOST: " host
-                echo "正在添加 DNS 记录..."
+                echo "Add CNAME record"
+                read -p "input DNS name: " dns_name
+                read -p "input HOST: " host
+                echo "Working..."
                 curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records" \
                 -H "Authorization: Bearer ${API_TOKEN}" \
                 -H "Content-Type: application/json" \
                 --data '{"type":"CNAME","name":"'"$dns_name"'","content":"'"$host"'","ttl":1,"proxied":true}' | jq .success
                 ;;
             3)
-                echo "您选择了添加 TXT 记录"
-                read -p "请输入 DNS 名称: " dns_name
-                read -p "请输入 TXT: " txt
-                echo "正在添加 DNS 记录..."
+                echo "Add TXT record"
+                read -p "input DNS name: " dns_name
+                read -p "input TXT: " txt
+                echo "Working..."
                 curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records" \
                 -H "Authorization: Bearer ${API_TOKEN}" \
                 -H "Content-Type: application/json" \
                 --data '{"type":"TXT","name":"'"$dns_name"'","content":"'"$txt"'","ttl":1,"proxied":false}'  | jq .success
                 ;;
             4)
-                echo "返回主菜单"
+                echo "return main menu"
                 ;;    
         esac
         ;;
     3)
-        echo "您选择了删除 DNS 记录"
+        echo "Delete DNS record"
         curl -s --request GET \
         --url https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records \
         -H "Authorization: Bearer ${API_TOKEN}" \
@@ -100,7 +89,7 @@ case $choice in
         exit 0
         ;;
     *)
-        echo "无效选项，请输入有效选项。"
+        echo "invalid option, please input valid option"
         ;;
 esac
 done
