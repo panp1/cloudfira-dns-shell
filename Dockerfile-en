@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y sudo tzdata wget curl unzip git vim jq 
 
 WORKDIR /app
 
-ADD dnstools.sh /app
-RUN sudo chmod +x  /app/dnstools.sh
+ADD dnstools-en.sh /app
+RUN sudo chmod +x  /app/dnstools-en.sh
 
-CMD ["/app/dnstools.sh"]
+CMD ["/app/dnstools-en.sh"]

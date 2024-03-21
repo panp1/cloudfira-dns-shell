@@ -9,22 +9,40 @@ Just a small request to use cloudflare DNS, so I write a shell to use it.
 
 ### Run in linux or MacOS
 
+zh
 ```
 git clone https://github.com/panp1/cloudfira-dns-shell.git
 cd cloudfira-dns-shell
-chmod +x dnstools.sh
+chmod +x dnstools-zh.sh
 export ZONE_ID="Your-Account-ZONE_ID"
 export API_TOKEN="Your-API-TOKEN"
-./dnstools.sh
+./dnstools-zh.sh
 ```
+![](./image/zh.jpg)
+
+en
+```
+git clone https://github.com/panp1/cloudfira-dns-shell.git
+cd cloudfira-dns-shell
+chmod +x dnstools-en.sh
+export ZONE_ID="Your-Account-ZONE_ID"
+export API_TOKEN="Your-API-TOKEN"
+./dnstools-en.sh
+```
+
+![](./image/en.jpg)
 
 ### Run in Docker
 
 ```
-docker run -it --rm -e ZONE_ID="xxxxxxxxxxxxxxxxxx" -e API_TOKEN="xxxxxxxxxxxxx" registry.cn-hangzhou.aliyuncs.com/orcc/cd-dns-tools
+docker run -it --rm -e ZONE_ID="xxxxxxxxxxxxxxxxxx" -e API_TOKEN="xxxxxxxxxxxxx" registry.cn-hangzhou.aliyuncs.com/orcc/cd-dns-tools:zh
 ```
 
-![](./image/1.jpg)
+```
+docker run -it --rm -e ZONE_ID="xxxxxxxxxxxxxxxxxx" -e API_TOKEN="xxxxxxxxxxxxx" registry.cn-hangzhou.aliyuncs.com/orcc/cd-dns-tools:cn
+```
+
+
 
 ## Usage
 -  DNS LIST
